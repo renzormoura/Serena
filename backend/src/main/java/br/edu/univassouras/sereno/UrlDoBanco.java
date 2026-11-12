@@ -57,6 +57,10 @@ final class UrlDoBanco {
         }
         int porta = uri.getPort() == -1 ? 5432 : uri.getPort();
         String banco = uri.getPath() == null ? "" : uri.getPath();
+        if (banco.isBlank() || banco.equals("/")) {
+            throw new IllegalStateException("SERENO_DB_URL sem o nome do banco (host " + host + "). Cole a Internal Database "
+                    + "URL inteira do Render, que termina com /nome_do_banco.");
+        }
         String parametros = uri.getRawQuery() == null ? "" : uri.getRawQuery();
         // URL externa do Render (host *.render.com) só aceita conexão com SSL.
         if (host.endsWith(".render.com") && !parametros.contains("sslmode")) {

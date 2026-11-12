@@ -40,4 +40,10 @@ class UrlDoBancoTest {
         org.assertj.core.api.Assertions.assertThatThrownBy(() -> UrlDoBanco.converter("mysql://u:segredo@h/db"))
                 .hasMessageContaining("mysql://").hasMessageNotContaining("segredo");
     }
+
+    @Test
+    void semONomeDoBancoAvisaOQueFalta() {
+        org.assertj.core.api.Assertions.assertThatThrownBy(() -> UrlDoBanco.converter("dpg-abc-a"))
+                .hasMessageContaining("sem o nome do banco");
+    }
 }
