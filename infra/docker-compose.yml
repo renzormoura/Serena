@@ -1,0 +1,31 @@
+# Serviços de apoio para desenvolvimento local.
+#   docker compose -f infra/docker-compose.yml up -d
+name: sereno
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: sereno
+      POSTGRES_USER: sereno
+      POSTGRES_PASSWORD: ${SERENO_DB_PASSWORD:-sereno-dev}
+      TZ: America/Sao_Paulo
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-dados:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sereno -d sereno"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # Caixa de e-mail falsa para testar notificações: http://localhost:8025
+  mailpit:
+    image: axllent/mailpit:v1.27
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+volumes:
+  postgres-dados:

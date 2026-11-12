@@ -1,0 +1,41 @@
+@import 'tailwindcss';
+
+/* Tokens do design aprovado: branco + bordô, minimalista. */
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  /* Nome "sereno" sob a logo da universidade. */
+  --font-marca: 'Nunito', 'Arial Rounded MT Bold', sans-serif;
+
+  --color-bordo: #7b1e2e;
+  --color-bordo-escuro: #5e1622;
+  --color-bordo-claro: #f7eef0;
+  --color-bordo-suave: #efdde1;
+  --color-bordo-trilho: #f3e8ea;
+
+  --color-tinta: #1d1a1b;
+  --color-tinta-media: #4a4346;
+  --color-apagado: #6b6466;
+  --color-linha: #ece7e8;
+  --color-linha-forte: #e4dddf;
+  --color-fundo: #fbfafa;
+
+  --color-ok: #2f6b4f;
+  --color-ok-fundo: #eaf3ee;
+  --color-alerta: #8a5a00;
+  --color-alerta-fundo: #fbf3e2;
+}
+
+@layer base {
+  body {
+    @apply bg-fundo font-sans text-tinta antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-bordo;
+  }
+}

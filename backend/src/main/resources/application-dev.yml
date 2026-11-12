@@ -1,0 +1,26 @@
+# Perfil de desenvolvimento local. Usa o Postgres do infra/docker-compose.yml.
+spring:
+  datasource:
+    password: ${SERENO_DB_PASSWORD:sereno-dev}
+  mail:
+    # Mailpit do infra/docker-compose.yml: os e-mails aparecem em http://localhost:8025, nada sai da máquina.
+    host: localhost
+    port: 1025
+
+sereno:
+  sessao:
+    cookie-seguro: false
+  api:
+    documentacao-aberta: true
+  ocr:
+    # Modelo de português do Tesseract (ver README). Sem o arquivo, o OCR fica desligado e nada quebra.
+    tessdata: ${SERENO_OCR_TESSDATA:.tessdata}
+  notificacao:
+    email-ativo: ${SERENO_EMAIL_ATIVO:true}
+  dev:
+    # Senha das contas locais aluno@dev.local, coordenacao@dev.local e admin@dev.local.
+    senha: ${SERENO_DEV_SENHA:sereno-dev}
+
+logging:
+  level:
+    br.edu.univassouras.sereno: DEBUG

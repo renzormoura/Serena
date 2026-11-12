@@ -1,0 +1,2448 @@
+{
+  "openapi" : "3.1.0",
+  "info" : {
+    "description" : "Horas complementares das Engenharias — Universidade de Vassouras",
+    "title" : "Sereno API",
+    "version" : "v1"
+  },
+  "servers" : [ {
+    "url" : "/"
+  } ],
+  "paths" : {
+    "/api/v1/admin/classificacao/acuracia" : {
+      "get" : {
+        "operationId" : "acuracia",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AcuraciaDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "acuracia-controller" ]
+      }
+    },
+    "/api/v1/admin/regulamentos/vigente/horas-exigidas" : {
+      "put" : {
+        "operationId" : "definirHorasExigidas",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/HorasExigidasForm"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Catalogo"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "admin-regulamento-controller" ]
+      }
+    },
+    "/api/v1/admin/regulamentos/vigente/itens/{numero}/classificacao" : {
+      "put" : {
+        "operationId" : "ajustar",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "numero",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ClassificacaoForm"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ItemDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "admin-regulamento-controller" ]
+      }
+    },
+    "/api/v1/alunos/me/requerimentos" : {
+      "get" : {
+        "operationId" : "listar_2",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RequerimentoDto"
+                  }
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "requerimento-do-aluno-controller" ]
+      },
+      "post" : {
+        "operationId" : "gerar_1",
+        "responses" : {
+          "201" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RequerimentoDto"
+                }
+              }
+            },
+            "description" : "Created"
+          }
+        },
+        "tags" : [ "requerimento-do-aluno-controller" ]
+      }
+    },
+    "/api/v1/alunos/me/requerimentos/{id}/pdf" : {
+      "get" : {
+        "operationId" : "pdf_1",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "string",
+                  "format" : "byte"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "requerimento-do-aluno-controller" ]
+      }
+    },
+    "/api/v1/alunos/me/requerimentos/{id}/xlsx" : {
+      "get" : {
+        "operationId" : "xlsx_1",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "string",
+                  "format" : "byte"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "requerimento-do-aluno-controller" ]
+      }
+    },
+    "/api/v1/alunos/me/saldo" : {
+      "get" : {
+        "operationId" : "saldo",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SaldoDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "certificado-controller" ]
+      }
+    },
+    "/api/v1/avisos" : {
+      "get" : {
+        "operationId" : "listar_3",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CaixaDeAvisos"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "aviso-controller" ]
+      }
+    },
+    "/api/v1/avisos/lidos" : {
+      "post" : {
+        "operationId" : "marcarLidos",
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        },
+        "tags" : [ "aviso-controller" ]
+      }
+    },
+    "/api/v1/cadastro" : {
+      "post" : {
+        "operationId" : "cadastrar",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CadastroForm"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CadastroCriado"
+                }
+              }
+            },
+            "description" : "Created"
+          }
+        },
+        "tags" : [ "cadastro-controller" ]
+      }
+    },
+    "/api/v1/certificados" : {
+      "get" : {
+        "operationId" : "listar_1",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/CertificadoDto"
+                  }
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "certificado-controller" ]
+      },
+      "post" : {
+        "operationId" : "lancar",
+        "requestBody" : {
+          "content" : {
+            "multipart/form-data" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "arquivo" : {
+                    "type" : "string",
+                    "format" : "binary"
+                  },
+                  "dados" : {
+                    "$ref" : "#/components/schemas/DadosCertificado"
+                  }
+                },
+                "required" : [ "arquivo", "dados" ]
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CertificadoDto"
+                }
+              }
+            },
+            "description" : "Created"
+          }
+        },
+        "tags" : [ "certificado-controller" ]
+      }
+    },
+    "/api/v1/certificados/envios" : {
+      "post" : {
+        "operationId" : "enviar",
+        "requestBody" : {
+          "content" : {
+            "multipart/form-data" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "arquivos" : {
+                    "type" : "array",
+                    "items" : {
+                      "type" : "string",
+                      "format" : "binary"
+                    }
+                  }
+                },
+                "required" : [ "arquivos" ]
+              }
+            }
+          }
+        },
+        "responses" : {
+          "202" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ResultadoEnvio"
+                  }
+                }
+              }
+            },
+            "description" : "Accepted"
+          }
+        },
+        "tags" : [ "certificado-controller" ]
+      }
+    },
+    "/api/v1/certificados/simular" : {
+      "post" : {
+        "operationId" : "simular_1",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/SimulacaoForm"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SimulacaoDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "certificado-controller" ]
+      }
+    },
+    "/api/v1/certificados/{id}" : {
+      "delete" : {
+        "operationId" : "excluir",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        },
+        "tags" : [ "certificado-controller" ]
+      },
+      "get" : {
+        "operationId" : "detalhar",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CertificadoDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "certificado-controller" ]
+      },
+      "put" : {
+        "operationId" : "atualizar",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/EdicaoForm"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CertificadoDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "certificado-controller" ]
+      }
+    },
+    "/api/v1/certificados/{id}/arquivo" : {
+      "get" : {
+        "operationId" : "arquivo_1",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "string",
+                  "format" : "binary"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "certificado-controller" ]
+      }
+    },
+    "/api/v1/coordenacao/alunos" : {
+      "get" : {
+        "operationId" : "alunos",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/AlunoNaCoordenacao"
+                  }
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "coordenacao-controller" ]
+      }
+    },
+    "/api/v1/coordenacao/alunos/{alunoId}/requerimentos" : {
+      "get" : {
+        "operationId" : "listar",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "alunoId",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RequerimentoDto"
+                  }
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "requerimento-controller" ]
+      },
+      "post" : {
+        "operationId" : "gerar",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "alunoId",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RequerimentoDto"
+                }
+              }
+            },
+            "description" : "Created"
+          }
+        },
+        "tags" : [ "requerimento-controller" ]
+      }
+    },
+    "/api/v1/coordenacao/alunos/{id}" : {
+      "get" : {
+        "operationId" : "ficha",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/FichaAlunoDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "coordenacao-controller" ]
+      }
+    },
+    "/api/v1/coordenacao/alunos/{id}/ingresso" : {
+      "put" : {
+        "operationId" : "definirIngresso",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/IngressoForm"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/FichaAlunoDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "coordenacao-controller" ]
+      }
+    },
+    "/api/v1/coordenacao/certificados/deferimentos" : {
+      "post" : {
+        "operationId" : "deferirEmLote",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/LoteForm"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ResultadoLote"
+                  }
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "coordenacao-controller" ]
+      }
+    },
+    "/api/v1/coordenacao/certificados/{id}" : {
+      "get" : {
+        "operationId" : "analisar",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AnaliseDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "coordenacao-controller" ]
+      }
+    },
+    "/api/v1/coordenacao/certificados/{id}/arquivo" : {
+      "get" : {
+        "operationId" : "arquivo",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "string",
+                  "format" : "binary"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "coordenacao-controller" ]
+      }
+    },
+    "/api/v1/coordenacao/certificados/{id}/decisao" : {
+      "post" : {
+        "operationId" : "decidir",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/DecisaoForm"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AnaliseDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "coordenacao-controller" ]
+      }
+    },
+    "/api/v1/coordenacao/certificados/{id}/exclusao" : {
+      "post" : {
+        "operationId" : "excluir_1",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ExclusaoForm"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        },
+        "tags" : [ "coordenacao-controller" ]
+      }
+    },
+    "/api/v1/coordenacao/certificados/{id}/simular" : {
+      "post" : {
+        "operationId" : "simular",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/SimulacaoCoordenacaoForm"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SimulacaoDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "coordenacao-controller" ]
+      }
+    },
+    "/api/v1/coordenacao/equipe" : {
+      "get" : {
+        "operationId" : "equipe",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EquipeDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "equipe-controller" ]
+      },
+      "post" : {
+        "operationId" : "criar",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/NovoMembroForm"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/MembroDto"
+                }
+              }
+            },
+            "description" : "Created"
+          }
+        },
+        "tags" : [ "equipe-controller" ]
+      }
+    },
+    "/api/v1/coordenacao/fila" : {
+      "get" : {
+        "operationId" : "fila",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ItemDaFila"
+                  }
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "coordenacao-controller" ]
+      }
+    },
+    "/api/v1/coordenacao/painel" : {
+      "get" : {
+        "operationId" : "painel",
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "curso",
+          "required" : false,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        }, {
+          "in" : "query",
+          "name" : "ingresso",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PainelDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "painel-controller" ]
+      }
+    },
+    "/api/v1/coordenacao/painel/xlsx" : {
+      "get" : {
+        "operationId" : "exportar",
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "curso",
+          "required" : false,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        }, {
+          "in" : "query",
+          "name" : "ingresso",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "string",
+                  "format" : "byte"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "painel-controller" ]
+      }
+    },
+    "/api/v1/coordenacao/requerimentos/{id}/pdf" : {
+      "get" : {
+        "operationId" : "pdf",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "string",
+                  "format" : "byte"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "requerimento-controller" ]
+      }
+    },
+    "/api/v1/coordenacao/requerimentos/{id}/xlsx" : {
+      "get" : {
+        "operationId" : "xlsx",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "string",
+                  "format" : "byte"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "requerimento-controller" ]
+      }
+    },
+    "/api/v1/cursos" : {
+      "get" : {
+        "operationId" : "cursos",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/CursoResumo"
+                  }
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "cadastro-controller" ]
+      }
+    },
+    "/api/v1/me" : {
+      "get" : {
+        "operationId" : "me",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UsuarioAtual"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "me-controller" ]
+      }
+    },
+    "/api/v1/regulamentos/vigente" : {
+      "get" : {
+        "operationId" : "vigente",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Catalogo"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "regulamento-controller" ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "AcuraciaDto" : {
+        "type" : "object",
+        "properties" : {
+          "acertos" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "avaliados" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "percentual" : {
+            "type" : [ "integer", "null" ],
+            "format" : "int32"
+          },
+          "porItem" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ItemAcuracia"
+            }
+          },
+          "trocasMaisComuns" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Troca"
+            }
+          }
+        },
+        "required" : [ "acertos", "avaliados", "percentual", "porItem", "trocasMaisComuns" ]
+      },
+      "Alerta" : {
+        "type" : "object",
+        "properties" : {
+          "gravidade" : {
+            "type" : "string",
+            "enum" : [ "FORTE", "ATENCAO", "INFORMACAO" ]
+          },
+          "mensagem" : {
+            "type" : "string"
+          },
+          "tipo" : {
+            "type" : "string",
+            "enum" : [ "NOME_DIFERENTE", "ARQUIVO_DE_OUTRA_CONTA", "CERTIFICADO_REPETIDO", "HORAS_DIFERENTES", "ITEM_TROCADO", "ARQUIVO_ILEGIVEL", "DATA_SUSPEITA", "HORAS_FORA_DO_COMUM", "LIMITE_ATINGIDO", "NAO_PARECE_CERTIFICADO", "PDF_EDITADO" ]
+          }
+        },
+        "required" : [ "gravidade", "mensagem", "tipo" ]
+      },
+      "AlunoEmAtencao" : {
+        "type" : "object",
+        "properties" : {
+          "curso" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "integralizadas" : {
+            "type" : "number"
+          },
+          "matricula" : {
+            "type" : "string"
+          },
+          "nome" : {
+            "type" : "string"
+          },
+          "percentual" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "periodo" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        },
+        "required" : [ "curso", "id", "integralizadas", "matricula", "nome", "percentual", "periodo" ]
+      },
+      "AlunoNaCoordenacao" : {
+        "type" : "object",
+        "properties" : {
+          "anoIngresso" : {
+            "type" : [ "integer", "null" ],
+            "format" : "int32"
+          },
+          "curso" : {
+            "type" : "string"
+          },
+          "emAjuste" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "exigidas" : {
+            "type" : [ "number", "null" ]
+          },
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "integralizadas" : {
+            "type" : "number"
+          },
+          "matricula" : {
+            "type" : "string"
+          },
+          "nome" : {
+            "type" : "string"
+          },
+          "paraAnalisar" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "pendentes" : {
+            "type" : "number"
+          },
+          "percentual" : {
+            "type" : [ "integer", "null" ],
+            "format" : "int32"
+          },
+          "periodo" : {
+            "type" : [ "integer", "null" ],
+            "format" : "int32"
+          },
+          "semestreIngresso" : {
+            "type" : [ "integer", "null" ],
+            "format" : "int32"
+          }
+        },
+        "required" : [ "anoIngresso", "curso", "emAjuste", "email", "exigidas", "id", "integralizadas", "matricula", "nome", "paraAnalisar", "pendentes", "percentual", "periodo", "semestreIngresso" ]
+      },
+      "AlunoNaFila" : {
+        "type" : "object",
+        "properties" : {
+          "curso" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "matricula" : {
+            "type" : "string"
+          },
+          "nome" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "curso", "id", "matricula", "nome" ]
+      },
+      "AlvoLote" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "versao" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "required" : [ "id", "versao" ]
+      },
+      "AnaliseDto" : {
+        "type" : "object",
+        "properties" : {
+          "alertas" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Alerta"
+            }
+          },
+          "aluno" : {
+            "$ref" : "#/components/schemas/AlunoNaFila"
+          },
+          "certificado" : {
+            "$ref" : "#/components/schemas/CertificadoDto"
+          },
+          "historico" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AvaliacaoDto"
+            }
+          },
+          "saldoAluno" : {
+            "$ref" : "#/components/schemas/SaldoDto"
+          }
+        },
+        "required" : [ "alertas", "aluno", "certificado", "historico", "saldoAluno" ]
+      },
+      "ArquivoResumo" : {
+        "type" : "object",
+        "properties" : {
+          "nome" : {
+            "type" : "string"
+          },
+          "tamanhoBytes" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "tipoMime" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "nome", "tamanhoBytes", "tipoMime" ]
+      },
+      "Automacao" : {
+        "type" : "object",
+        "properties" : {
+          "conferidos" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "percentualAceitas" : {
+            "type" : [ "integer", "null" ],
+            "format" : "int32"
+          },
+          "trocasMaisComuns" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Troca"
+            }
+          }
+        },
+        "required" : [ "conferidos", "percentualAceitas", "trocasMaisComuns" ]
+      },
+      "AvaliacaoDto" : {
+        "type" : "object",
+        "properties" : {
+          "avaliador" : {
+            "type" : "string"
+          },
+          "criadoEm" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "decisao" : {
+            "type" : "string",
+            "enum" : [ "DEFERIDO", "INDEFERIDO", "AJUSTE_SOLICITADO", "REABERTO", "EXCLUIDO" ]
+          },
+          "horasAnteriores" : {
+            "type" : [ "number", "null" ]
+          },
+          "horasNovas" : {
+            "type" : [ "number", "null" ]
+          },
+          "itemAnterior" : {
+            "type" : [ "integer", "null" ],
+            "format" : "int32"
+          },
+          "itemNovo" : {
+            "type" : [ "integer", "null" ],
+            "format" : "int32"
+          },
+          "justificativa" : {
+            "type" : [ "string", "null" ]
+          }
+        },
+        "required" : [ "avaliador", "criadoEm", "decisao", "horasAnteriores", "horasNovas", "itemAnterior", "itemNovo", "justificativa" ]
+      },
+      "AvisoDto" : {
+        "type" : "object",
+        "properties" : {
+          "criadoEm" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "lido" : {
+            "type" : "boolean"
+          },
+          "link" : {
+            "type" : [ "string", "null" ]
+          },
+          "mensagem" : {
+            "type" : "string"
+          },
+          "titulo" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "criadoEm", "id", "lido", "link", "mensagem", "titulo" ]
+      },
+      "CadastroCriado" : {
+        "type" : "object",
+        "properties" : {
+          "alunoId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "matricula" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "alunoId", "matricula" ]
+      },
+      "CadastroForm" : {
+        "type" : "object",
+        "properties" : {
+          "cursoId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "email" : {
+            "type" : "string",
+            "format" : "email",
+            "maxLength" : 254,
+            "minLength" : 0
+          },
+          "matricula" : {
+            "type" : "string",
+            "minLength" : 1,
+            "pattern" : "[0-9A-Za-z.-]{3,30}"
+          },
+          "nome" : {
+            "type" : "string",
+            "maxLength" : 200,
+            "minLength" : 0
+          },
+          "senha" : {
+            "type" : "string",
+            "maxLength" : 200,
+            "minLength" : 0
+          }
+        },
+        "required" : [ "cursoId", "email", "matricula", "nome", "senha" ]
+      },
+      "CaixaDeAvisos" : {
+        "type" : "object",
+        "properties" : {
+          "avisos" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AvisoDto"
+            }
+          },
+          "naoLidos" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "required" : [ "avisos", "naoLidos" ]
+      },
+      "Catalogo" : {
+        "type" : "object",
+        "properties" : {
+          "horasExigidas" : {
+            "type" : [ "number", "null" ]
+          },
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "macroatividades" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/MacroDto"
+            }
+          },
+          "nome" : {
+            "type" : "string"
+          },
+          "versao" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        },
+        "required" : [ "horasExigidas", "id", "macroatividades", "nome", "versao" ]
+      },
+      "CertificadoDto" : {
+        "type" : "object",
+        "properties" : {
+          "arquivo" : {
+            "$ref" : "#/components/schemas/ArquivoResumo"
+          },
+          "avaliadoEm" : {
+            "type" : [ "string", "null" ],
+            "format" : "date-time"
+          },
+          "cortes" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "criadoEm" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "dataFim" : {
+            "type" : [ "string", "null" ],
+            "format" : "date"
+          },
+          "dataInicio" : {
+            "type" : [ "string", "null" ],
+            "format" : "date"
+          },
+          "editavel" : {
+            "type" : "boolean"
+          },
+          "excluivel" : {
+            "type" : "boolean"
+          },
+          "horasCertificado" : {
+            "type" : [ "number", "null" ]
+          },
+          "horasQueContam" : {
+            "type" : [ "number", "null" ]
+          },
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "instituicao" : {
+            "type" : [ "string", "null" ]
+          },
+          "item" : {
+            "anyOf" : [ {
+              "$ref" : "#/components/schemas/ItemResumo"
+            }, {
+              "type" : "null"
+            } ]
+          },
+          "leitura" : {
+            "anyOf" : [ {
+              "$ref" : "#/components/schemas/LeituraDto"
+            }, {
+              "type" : "null"
+            } ]
+          },
+          "observacaoAluno" : {
+            "type" : [ "string", "null" ]
+          },
+          "observacaoCoordenacao" : {
+            "type" : [ "string", "null" ]
+          },
+          "origemClassificacao" : {
+            "type" : "string",
+            "enum" : [ "MANUAL", "REGRA", "IA", "IMPORTACAO" ]
+          },
+          "status" : {
+            "type" : "string",
+            "enum" : [ "PROCESSANDO", "AGUARDANDO_CONFIRMACAO", "CONFIRMADO", "AJUSTE_SOLICITADO", "DEFERIDO", "INDEFERIDO" ]
+          },
+          "sugestaoItem" : {
+            "anyOf" : [ {
+              "$ref" : "#/components/schemas/SugestaoItemDto"
+            }, {
+              "type" : "null"
+            } ]
+          },
+          "titulo" : {
+            "type" : [ "string", "null" ]
+          },
+          "versao" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "required" : [ "arquivo", "avaliadoEm", "cortes", "criadoEm", "dataFim", "dataInicio", "editavel", "excluivel", "horasCertificado", "horasQueContam", "id", "instituicao", "item", "leitura", "observacaoAluno", "observacaoCoordenacao", "origemClassificacao", "status", "sugestaoItem", "titulo", "versao" ]
+      },
+      "ClassificacaoForm" : {
+        "type" : "object",
+        "properties" : {
+          "origemEsperada" : {
+            "type" : "string",
+            "enum" : [ "INTERNA", "EXTERNA", "QUALQUER" ]
+          },
+          "palavrasChave" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "maxLength" : 80,
+              "minLength" : 0
+            },
+            "maxItems" : 40,
+            "minItems" : 0
+          }
+        },
+        "required" : [ "origemEsperada", "palavrasChave" ]
+      },
+      "CursoOpcao" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "nome" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "id", "nome" ]
+      },
+      "CursoResumo" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "nome" : {
+            "type" : "string"
+          },
+          "sigla" : {
+            "type" : [ "string", "null" ]
+          }
+        },
+        "required" : [ "id", "nome", "sigla" ]
+      },
+      "DadosCertificado" : {
+        "type" : "object",
+        "properties" : {
+          "dataFim" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "dataInicio" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "horasCertificado" : {
+            "type" : "number",
+            "maximum" : 2000,
+            "minimum" : 0
+          },
+          "instituicao" : {
+            "type" : "string",
+            "maxLength" : 200,
+            "minLength" : 0
+          },
+          "itemNumero" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "observacao" : {
+            "type" : "string",
+            "maxLength" : 250,
+            "minLength" : 0
+          },
+          "titulo" : {
+            "type" : "string",
+            "maxLength" : 300,
+            "minLength" : 0
+          }
+        },
+        "required" : [ "horasCertificado", "itemNumero", "titulo" ]
+      },
+      "DecisaoForm" : {
+        "type" : "object",
+        "properties" : {
+          "decisao" : {
+            "type" : "string",
+            "enum" : [ "DEFERIR", "INDEFERIR", "SOLICITAR_AJUSTE", "REABRIR" ]
+          },
+          "horasCertificado" : {
+            "type" : "number",
+            "minimum" : 0
+          },
+          "itemNumero" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "justificativa" : {
+            "type" : "string",
+            "maxLength" : 1000,
+            "minLength" : 0
+          },
+          "versao" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "required" : [ "decisao", "versao" ]
+      },
+      "DecisoesPorItem" : {
+        "type" : "object",
+        "properties" : {
+          "ajustes" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "deferidos" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "indeferidos" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "nome" : {
+            "type" : "string"
+          },
+          "numero" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        },
+        "required" : [ "ajustes", "deferidos", "indeferidos", "nome", "numero" ]
+      },
+      "EdicaoForm" : {
+        "type" : "object",
+        "properties" : {
+          "dados" : {
+            "$ref" : "#/components/schemas/DadosCertificado"
+          },
+          "versao" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "required" : [ "dados", "versao" ]
+      },
+      "EquipeDto" : {
+        "type" : "object",
+        "properties" : {
+          "cursosQuePodeAtribuir" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CursoResumo"
+            }
+          },
+          "membros" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/MembroDto"
+            }
+          },
+          "podeCriarAdmin" : {
+            "type" : "boolean"
+          }
+        },
+        "required" : [ "cursosQuePodeAtribuir", "membros", "podeCriarAdmin" ]
+      },
+      "ExclusaoForm" : {
+        "type" : "object",
+        "properties" : {
+          "justificativa" : {
+            "type" : "string",
+            "maxLength" : 1000,
+            "minLength" : 0
+          },
+          "versao" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "required" : [ "versao" ]
+      },
+      "Faixa" : {
+        "type" : "object",
+        "properties" : {
+          "alunos" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "rotulo" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "alunos", "rotulo" ]
+      },
+      "FichaAlunoDto" : {
+        "type" : "object",
+        "properties" : {
+          "aluno" : {
+            "$ref" : "#/components/schemas/AlunoNaCoordenacao"
+          },
+          "certificados" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CertificadoDto"
+            }
+          },
+          "saldo" : {
+            "$ref" : "#/components/schemas/SaldoDto"
+          }
+        },
+        "required" : [ "aluno", "certificados", "saldo" ]
+      },
+      "FiltrosDisponiveis" : {
+        "type" : "object",
+        "properties" : {
+          "anosIngresso" : {
+            "type" : "array",
+            "items" : {
+              "type" : "integer",
+              "format" : "int32"
+            }
+          },
+          "cursos" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CursoOpcao"
+            }
+          }
+        },
+        "required" : [ "anosIngresso", "cursos" ]
+      },
+      "HorasExigidasForm" : {
+        "type" : "object",
+        "properties" : {
+          "horasExigidas" : {
+            "type" : "number",
+            "maximum" : 2000,
+            "minimum" : 1
+          }
+        }
+      },
+      "IngressoForm" : {
+        "type" : "object",
+        "properties" : {
+          "anoIngresso" : {
+            "type" : "integer",
+            "format" : "int32",
+            "maximum" : 2100,
+            "minimum" : 1990
+          },
+          "semestreIngresso" : {
+            "type" : "integer",
+            "format" : "int32",
+            "maximum" : 2,
+            "minimum" : 1
+          }
+        }
+      },
+      "ItemAcuracia" : {
+        "type" : "object",
+        "properties" : {
+          "acertos" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "nome" : {
+            "type" : "string"
+          },
+          "numero" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "percentual" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "sugeridos" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "required" : [ "acertos", "nome", "numero", "percentual", "sugeridos" ]
+      },
+      "ItemDaFila" : {
+        "type" : "object",
+        "properties" : {
+          "alertas" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Alerta"
+            }
+          },
+          "aluno" : {
+            "$ref" : "#/components/schemas/AlunoNaFila"
+          },
+          "alunoTrocouSugestao" : {
+            "type" : "boolean"
+          },
+          "certificado" : {
+            "$ref" : "#/components/schemas/CertificadoDto"
+          },
+          "enviadoParaAnalise" : {
+            "type" : [ "string", "null" ],
+            "format" : "date-time"
+          },
+          "prioridade" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        },
+        "required" : [ "alertas", "aluno", "alunoTrocouSugestao", "certificado", "enviadoParaAnalise", "prioridade" ]
+      },
+      "ItemDto" : {
+        "type" : "object",
+        "properties" : {
+          "descricao" : {
+            "type" : [ "string", "null" ]
+          },
+          "estrategia" : {
+            "type" : "string",
+            "enum" : [ "FIXO_POR_OCORRENCIA", "HORAS_CERTIFICADO", "HORAS_CERTIFICADO_COM_TETO" ]
+          },
+          "horasPorOcorrencia" : {
+            "type" : "number"
+          },
+          "limiteHoras" : {
+            "type" : [ "number", "null" ]
+          },
+          "limiteOcorrencias" : {
+            "type" : [ "integer", "null" ],
+            "format" : "int32"
+          },
+          "nome" : {
+            "type" : "string"
+          },
+          "numero" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "origemEsperada" : {
+            "type" : "string",
+            "enum" : [ "INTERNA", "EXTERNA", "QUALQUER" ]
+          },
+          "palavrasChave" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "tetoPorOcorrencia" : {
+            "type" : [ "number", "null" ]
+          }
+        },
+        "required" : [ "descricao", "estrategia", "horasPorOcorrencia", "limiteHoras", "limiteOcorrencias", "nome", "numero", "origemEsperada", "palavrasChave", "tetoPorOcorrencia" ]
+      },
+      "ItemResumo" : {
+        "type" : "object",
+        "properties" : {
+          "horasPorOcorrencia" : {
+            "type" : "number"
+          },
+          "macroCodigo" : {
+            "type" : "string"
+          },
+          "macroNome" : {
+            "type" : "string"
+          },
+          "nome" : {
+            "type" : "string"
+          },
+          "numero" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        },
+        "required" : [ "horasPorOcorrencia", "macroCodigo", "macroNome", "nome", "numero" ]
+      },
+      "ItemUsado" : {
+        "type" : "object",
+        "properties" : {
+          "certificados" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "nome" : {
+            "type" : "string"
+          },
+          "numero" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        },
+        "required" : [ "certificados", "nome", "numero" ]
+      },
+      "LeituraDto" : {
+        "type" : "object",
+        "properties" : {
+          "avisos" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "metodo" : {
+            "type" : "string",
+            "enum" : [ "TEXTO", "OCR", "SEM_TEXTO", "FALHA" ]
+          },
+          "nomeConfere" : {
+            "type" : [ "boolean", "null" ]
+          },
+          "trechos" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        },
+        "required" : [ "avisos", "metodo", "nomeConfere", "trechos" ]
+      },
+      "LoteForm" : {
+        "type" : "object",
+        "properties" : {
+          "certificados" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AlvoLote"
+            },
+            "maxItems" : 100,
+            "minItems" : 0
+          }
+        },
+        "required" : [ "certificados" ]
+      },
+      "MacroDto" : {
+        "type" : "object",
+        "properties" : {
+          "codigo" : {
+            "type" : "string"
+          },
+          "itens" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ItemDto"
+            }
+          },
+          "limiteHoras" : {
+            "type" : [ "number", "null" ]
+          },
+          "nome" : {
+            "type" : "string"
+          },
+          "ordem" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        },
+        "required" : [ "codigo", "itens", "limiteHoras", "nome", "ordem" ]
+      },
+      "MembroDto" : {
+        "type" : "object",
+        "properties" : {
+          "criadoEm" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "cursos" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CursoResumo"
+            }
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "nome" : {
+            "type" : "string"
+          },
+          "papel" : {
+            "type" : "string",
+            "enum" : [ "ALUNO", "COORDENADOR", "ADMIN" ]
+          }
+        },
+        "required" : [ "criadoEm", "cursos", "email", "id", "nome", "papel" ]
+      },
+      "NovoMembroForm" : {
+        "type" : "object",
+        "properties" : {
+          "cursoIds" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "format" : "uuid"
+            }
+          },
+          "email" : {
+            "type" : "string",
+            "format" : "email",
+            "maxLength" : 254,
+            "minLength" : 0
+          },
+          "nome" : {
+            "type" : "string",
+            "maxLength" : 200,
+            "minLength" : 0
+          },
+          "papel" : {
+            "type" : "string",
+            "enum" : [ "ALUNO", "COORDENADOR", "ADMIN" ]
+          },
+          "senha" : {
+            "type" : "string",
+            "maxLength" : 200,
+            "minLength" : 0
+          }
+        },
+        "required" : [ "email", "nome", "papel", "senha" ]
+      },
+      "PainelDto" : {
+        "type" : "object",
+        "properties" : {
+          "aguardandoAnalise" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "alunos" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "atencaoDisponivel" : {
+            "type" : "boolean"
+          },
+          "automacao" : {
+            "$ref" : "#/components/schemas/Automacao"
+          },
+          "concluiram" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "decisoesPorItem" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/DecisoesPorItem"
+            }
+          },
+          "diasMedioAnalise" : {
+            "type" : [ "number", "null" ],
+            "format" : "double"
+          },
+          "emAtencao" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AlunoEmAtencao"
+            }
+          },
+          "exigidas" : {
+            "type" : [ "number", "null" ]
+          },
+          "faixas" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Faixa"
+            }
+          },
+          "filtros" : {
+            "$ref" : "#/components/schemas/FiltrosDisponiveis"
+          },
+          "itensMaisUsados" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ItemUsado"
+            }
+          },
+          "modoFaixas" : {
+            "type" : "string"
+          },
+          "percentualAtencao" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "percentualConcluiram" : {
+            "type" : [ "integer", "null" ],
+            "format" : "int32"
+          },
+          "periodoAtencao" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "porIngresso" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PorIngresso"
+            }
+          }
+        },
+        "required" : [ "aguardandoAnalise", "alunos", "atencaoDisponivel", "automacao", "concluiram", "decisoesPorItem", "diasMedioAnalise", "emAtencao", "exigidas", "faixas", "filtros", "itensMaisUsados", "modoFaixas", "percentualAtencao", "percentualConcluiram", "periodoAtencao", "porIngresso" ]
+      },
+      "PorIngresso" : {
+        "type" : "object",
+        "properties" : {
+          "alunos" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "anoIngresso" : {
+            "type" : [ "integer", "null" ],
+            "format" : "int32"
+          },
+          "mediaIntegralizadas" : {
+            "type" : "number"
+          }
+        },
+        "required" : [ "alunos", "anoIngresso", "mediaIntegralizadas" ]
+      },
+      "RequerimentoDto" : {
+        "type" : "object",
+        "properties" : {
+          "coordenador" : {
+            "type" : [ "string", "null" ]
+          },
+          "dataDeferimento" : {
+            "type" : [ "string", "null" ],
+            "format" : "date"
+          },
+          "geradoEm" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "geradoPeloAluno" : {
+            "type" : "boolean"
+          },
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "numero" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "totalHoras" : {
+            "type" : "number"
+          }
+        },
+        "required" : [ "coordenador", "dataDeferimento", "geradoEm", "geradoPeloAluno", "id", "numero", "totalHoras" ]
+      },
+      "ResultadoEnvio" : {
+        "type" : "object",
+        "properties" : {
+          "certificado" : {
+            "anyOf" : [ {
+              "$ref" : "#/components/schemas/CertificadoDto"
+            }, {
+              "type" : "null"
+            } ]
+          },
+          "erroCodigo" : {
+            "type" : [ "string", "null" ]
+          },
+          "erroMensagem" : {
+            "type" : [ "string", "null" ]
+          },
+          "nomeArquivo" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "certificado", "erroCodigo", "erroMensagem", "nomeArquivo" ]
+      },
+      "ResultadoLote" : {
+        "type" : "object",
+        "properties" : {
+          "deferido" : {
+            "type" : "boolean"
+          },
+          "erroCodigo" : {
+            "type" : [ "string", "null" ]
+          },
+          "erroMensagem" : {
+            "type" : [ "string", "null" ]
+          },
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        },
+        "required" : [ "deferido", "erroCodigo", "erroMensagem", "id" ]
+      },
+      "SaldoDto" : {
+        "type" : "object",
+        "properties" : {
+          "certificadosPorStatus" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          },
+          "exigidas" : {
+            "type" : [ "number", "null" ]
+          },
+          "faltantes" : {
+            "type" : [ "number", "null" ]
+          },
+          "integralizadas" : {
+            "type" : "number"
+          },
+          "pendentes" : {
+            "type" : "number"
+          },
+          "percentual" : {
+            "type" : [ "integer", "null" ],
+            "format" : "int32"
+          },
+          "porItem" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/SaldoPorItem"
+            }
+          },
+          "porMacro" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/SaldoPorMacro"
+            }
+          },
+          "projecao" : {
+            "type" : "number"
+          }
+        },
+        "required" : [ "certificadosPorStatus", "exigidas", "faltantes", "integralizadas", "pendentes", "percentual", "porItem", "porMacro", "projecao" ]
+      },
+      "SaldoPorItem" : {
+        "type" : "object",
+        "properties" : {
+          "horas" : {
+            "type" : "number"
+          },
+          "nome" : {
+            "type" : "string"
+          },
+          "numero" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        },
+        "required" : [ "horas", "nome", "numero" ]
+      },
+      "SaldoPorMacro" : {
+        "type" : "object",
+        "properties" : {
+          "codigo" : {
+            "type" : "string"
+          },
+          "horas" : {
+            "type" : "number"
+          },
+          "horasProjetadas" : {
+            "type" : "number"
+          },
+          "limiteHoras" : {
+            "type" : [ "number", "null" ]
+          },
+          "nome" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "codigo", "horas", "horasProjetadas", "limiteHoras", "nome" ]
+      },
+      "SimulacaoCoordenacaoForm" : {
+        "type" : "object",
+        "properties" : {
+          "horasCertificado" : {
+            "type" : "number",
+            "minimum" : 0
+          },
+          "itemNumero" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        },
+        "required" : [ "horasCertificado", "itemNumero" ]
+      },
+      "SimulacaoDto" : {
+        "type" : "object",
+        "properties" : {
+          "cortes" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "horasBrutas" : {
+            "type" : "number"
+          },
+          "horasQueContam" : {
+            "type" : "number"
+          },
+          "item" : {
+            "$ref" : "#/components/schemas/ItemResumo"
+          }
+        },
+        "required" : [ "cortes", "horasBrutas", "horasQueContam", "item" ]
+      },
+      "SimulacaoForm" : {
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "horasCertificado" : {
+            "type" : "number",
+            "minimum" : 0
+          },
+          "ignorarCertificado" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "itemNumero" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        },
+        "required" : [ "horasCertificado", "itemNumero" ]
+      },
+      "SugestaoItemDto" : {
+        "type" : "object",
+        "properties" : {
+          "alternativas" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ItemResumo"
+            }
+          },
+          "confianca" : {
+            "type" : "string",
+            "enum" : [ "ALTA", "MEDIA", "BAIXA" ]
+          },
+          "item" : {
+            "$ref" : "#/components/schemas/ItemResumo"
+          },
+          "motivo" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "alternativas", "confianca", "item", "motivo" ]
+      },
+      "Troca" : {
+        "type" : "object",
+        "properties" : {
+          "escolhido" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "nomeEscolhido" : {
+            "type" : "string"
+          },
+          "nomeSugerido" : {
+            "type" : "string"
+          },
+          "sugerido" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "vezes" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "required" : [ "escolhido", "nomeEscolhido", "nomeSugerido", "sugerido", "vezes" ]
+      },
+      "UsuarioAtual" : {
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "nome" : {
+            "type" : "string"
+          },
+          "papeis" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "ALUNO", "COORDENADOR", "ADMIN" ]
+            }
+          }
+        },
+        "required" : [ "email", "id", "nome", "papeis" ]
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+# Sistema operacional / editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.iml
+
+# Variáveis locais
+.env
+.env.*
+!.env.example
+
+# Ferramentas
+.claude/settings.local.json
+
+# Índices gerados por ferramentas de análise de código
+.code-review-graph/
+graphify-out/

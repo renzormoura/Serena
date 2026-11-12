@@ -1,0 +1,75 @@
+spring:
+  application:
+    name: sereno
+  datasource:
+    url: ${SERENO_DB_URL:jdbc:postgresql://localhost:5432/sereno}
+    username: ${SERENO_DB_USER:sereno}
+    password: ${SERENO_DB_PASSWORD:}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+  session:
+    timeout: 8h
+    jdbc:
+      initialize-schema: never   # tabelas criadas pelo Flyway (V3)
+  mvc:
+    problemdetails:
+      enabled: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 101MB   # até 10 arquivos de 10 MB por envio
+  threads:
+    virtual:
+      enabled: true
+  jackson:
+    time-zone: America/Sao_Paulo
+  modulith:
+    events:
+      # Leituras de certificado interrompidas por queda ou deploy voltam a rodar ao subir.
+      republish-outstanding-events-on-restart: true
+      jdbc:
+        schema-initialization:
+          enabled: false   # tabela criada pelo Flyway (V7)
+
+sereno:
+  sessao:
+    # Cookie SERENO_SESSION (ver identidade.SessaoConfig). Só desligar em desenvolvimento sem HTTPS.
+    cookie-seguro: ${SERENO_COOKIE_SECURE:true}
+  cadastro:
+    # Domínios de e-mail aceitos no cadastro, separados por vírgula. Vazio = qualquer domínio.
+    dominios-permitidos: ${SERENO_DOMINIOS_PERMITIDOS:}
+  avaliacao:
+    # true: só certificados deferidos pela coordenação contam como integralizados (decisão D4).
+    exige-deferimento: true
+  arquivos:
+    diretorio: ${SERENO_ARQUIVOS_DIR:./dados/arquivos}
+  api:
+    documentacao-aberta: false
+  notificacao:
+    # Avisos ao aluno (ajuste solicitado, indeferimento). Exige spring.mail.host (SPRING_MAIL_HOST etc.).
+    email-ativo: ${SERENO_EMAIL_ATIVO:false}
+    remetente: ${SERENO_EMAIL_REMETENTE:Sereno <nao-responda@univassouras.edu.br>}
+    # Endereço do sistema, usado nos links dos e-mails.
+    url-base: ${SERENO_URL_BASE:http://localhost:5173}
+
+springdoc:
+  writer-with-default-pretty-printer: true
+  writer-with-order-by-keys: true
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
