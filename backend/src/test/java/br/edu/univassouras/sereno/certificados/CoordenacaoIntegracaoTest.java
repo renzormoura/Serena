@@ -37,7 +37,7 @@ class CoordenacaoIntegracaoTest extends CoordenacaoBase {
         assertThat(deferido).hasStatusOk();
         assertThat(deferido).bodyJson().extractingPath("$.certificado.status").isEqualTo("DEFERIDO");
         assertThat(deferido).bodyJson().extractingPath("$.historico[0].decisao").isEqualTo("DEFERIDO");
-        assertThat(deferido).bodyJson().extractingPath("$.historico[0].avaliador").isEqualTo("Coordenação (dev)");
+        assertThat(deferido).bodyJson().extractingPath("$.historico[0].avaliador").isEqualTo("Coordenação");
 
         // Para o aluno: integralizado, e não pode mais editar nem excluir.
         assertThat(mvc.get().uri("/api/v1/alunos/me/saldo").cookie(aluno.sessao()))

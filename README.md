@@ -135,7 +135,12 @@ Abra **http://localhost:5173**.
 | Coordenação (as quatro engenharias) | `coordenacao@dev.local` | `sereno-dev` |
 | Administração | `admin@dev.local` | `sereno-dev` |
 
-A senha pode ser trocada com `SERENO_DEV_SENHA`. Os e-mails enviados aos alunos ficam no Mailpit, em
+Além dessas, o sistema tem **contas fixas no código** (`ContasFixas`). Elas existem em qualquer ambiente,
+inclusive em produção, e são recriadas ao subir se o banco for perdido: o administrador `adm@gmail.com`, a
+coordenação `coordenacao@dev.local` (vinculada às quatro engenharias) e dois alunos, com as matrículas 202410568
+e 202412748. Elas não seguem a regra de senha do cadastro.
+
+A senha das contas de teste pode ser trocada com `SERENO_DEV_SENHA`. Os e-mails enviados aos alunos ficam no Mailpit, em
 http://localhost:8025; nada sai da máquina.
 
 ### OCR (fotos e PDFs escaneados)

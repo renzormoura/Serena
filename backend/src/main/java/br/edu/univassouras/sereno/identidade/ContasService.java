@@ -59,6 +59,18 @@ public class ContasService implements UserDetailsService {
         return usuarios.save(new Usuario(email, conta.nome(), encoder.encode(conta.senha()), conta.papel())).getId();
     }
 
+    /**
+     * Contas fixas, definidas no código (ver academico.ContasFixas): criadas se ainda não existirem, sem a regra de
+     * senha do cadastro. Se a conta já existe, nada muda.
+     */
+    @Transactional
+    public UUID garantirContaFixa(NovaConta conta) {
+        String email = Usuario.normalizarEmail(conta.email());
+        return usuarios.findByEmail(email)
+                .map(Usuario::getId)
+                .orElseGet(() -> usuarios.save(new Usuario(email, conta.nome(), encoder.encode(conta.senha()), conta.papel())).getId());
+    }
+
     /** Pelo menos 8 caracteres, uma letra e um caractere que não seja letra, número nem espaço. */
     public static boolean senhaAceita(String senha) {
         return senha != null && senha.length() >= SENHA_MINIMA

@@ -67,7 +67,7 @@ class RequerimentoIntegracaoTest extends IntegracaoBase {
         String corpo = gerado.getResponse().getContentAsString(StandardCharsets.UTF_8);
         assertThat(JsonPath.<Integer>read(corpo, "$.numero")).isEqualTo(1);
         assertThat(JsonPath.<Double>read(corpo, "$.totalHoras")).isEqualTo(95.0);
-        assertThat(JsonPath.<String>read(corpo, "$.coordenador")).isEqualTo("Coordenação (dev)");
+        assertThat(JsonPath.<String>read(corpo, "$.coordenador")).isEqualTo("Coordenação");
         String id = JsonPath.read(corpo, "$.id");
         String hoje = LocalDate.now(ZoneId.of("America/Sao_Paulo")).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
@@ -97,7 +97,7 @@ class RequerimentoIntegracaoTest extends IntegracaoBase {
         assertThat(pdf).hasStatusOk().hasContentType(MediaType.APPLICATION_PDF);
         try (PDDocument doc = Loader.loadPDF(pdf.getResponse().getContentAsByteArray())) {
             String texto = new PDFTextStripper().getText(doc);
-            assertThat(texto).contains("CURSO DE ENGENHARIA", aluno.matricula(), "Coordenação (dev)", hoje, "Monitoria");
+            assertThat(texto).contains("CURSO DE ENGENHARIA", aluno.matricula(), "Coordenação", hoje, "Monitoria");
         }
 
         // A lista guarda o histórico: gerar de novo cria o nº 2.

@@ -74,6 +74,21 @@ public class AlunoService {
         return cursos.ativos().stream().map(c -> new CursoResumo(c.getId(), c.getNome(), c.getSigla())).toList();
     }
 
+    /** Aluno fixo, definido no código: criado (com a conta) se ainda não existir. */
+    @Transactional
+    public void garantirAlunoFixo(String nome, String email, String senha, String matricula, UUID cursoId) {
+        if (alunos.existsByMatricula(matricula)) {
+            return;
+        }
+        UUID usuarioId = contas.garantirContaFixa(new ContasService.NovaConta(email, nome, senha, Papel.ALUNO));
+        if (alunos.findByUsuarioId(usuarioId).isPresent()) {
+            return;
+        }
+        Curso curso = cursos.findById(cursoId).orElseThrow(() -> new IllegalStateException("Curso fixo não existe: " + cursoId));
+        UUID regulamentoId = catalogo.idVigente().orElseThrow(() -> new IllegalStateException("Nenhum regulamento publicado"));
+        alunos.save(new Aluno(usuarioId, matricula, curso, regulamentoId));
+    }
+
     /** Dá ao coordenador acesso aos alunos do curso. Repetir não tem efeito. */
     @Transactional
     public void vincularCoordenador(UUID usuarioId, UUID cursoId) {
