@@ -1,3 +1,9 @@
+server:
+  # O Render (e outras plataformas) informa a porta em PORT.
+  port: ${PORT:8080}
+  # Atrás do proxy HTTPS do Render: respeita X-Forwarded-Proto/Host.
+  forward-headers-strategy: native
+
 spring:
   application:
     name: sereno
@@ -49,6 +55,11 @@ sereno:
     diretorio: ${SERENO_ARQUIVOS_DIR:./dados/arquivos}
   api:
     documentacao-aberta: false
+  admin-inicial:
+    # Cria a primeira conta de administração ao subir, se ainda não existir (produção não tem contas de teste).
+    email: ${SERENO_ADMIN_EMAIL:}
+    senha: ${SERENO_ADMIN_SENHA:}
+    nome: ${SERENO_ADMIN_NOME:Administração}
   notificacao:
     # Avisos ao aluno (ajuste solicitado, indeferimento). Exige spring.mail.host (SPRING_MAIL_HOST etc.).
     email-ativo: ${SERENO_EMAIL_ATIVO:false}

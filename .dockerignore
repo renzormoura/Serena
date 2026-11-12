@@ -1,0 +1,13 @@
+.git
+.github
+.claude
+.code-review-graph
+graphify-out
+**/node_modules
+**/dist
+**/target
+backend/dados
+backend/.tessdata
+docs
+infra
+*.md

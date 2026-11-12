@@ -22,7 +22,8 @@ import org.testcontainers.junit.jupiter.Testcontainers;
  */
 @Testcontainers(disabledWithoutDocker = true)
 @Import(TestcontainersConfiguration.class)
-@SpringBootTest(properties = {"sereno.arquivos.diretorio=target/arquivos-de-teste", "sereno.notificacao.email-ativo=false"})
+@SpringBootTest(properties = {"sereno.arquivos.diretorio=target/arquivos-de-teste", "sereno.notificacao.email-ativo=false",
+        "sereno.admin-inicial.email=admin-inicial@teste.local", "sereno.admin-inicial.senha=inicial-123!"})
 @AutoConfigureMockMvc
 @ActiveProfiles("dev")
 public abstract class IntegracaoBase {

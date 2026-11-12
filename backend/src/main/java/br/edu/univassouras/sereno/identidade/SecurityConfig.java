@@ -44,7 +44,10 @@ class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, LOGIN, "/api/v1/cadastro").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/regulamentos/**", "/api/v1/cursos").permitAll()
                         .requestMatchers("/v3/api-docs/**").access((autenticacao, contexto) -> new AuthorizationDecision(documentacaoAberta))
-                        .anyRequest().authenticated())
+                        .requestMatchers("/api/**", "/actuator/**").authenticated()
+                        // O resto são as telas (o build do frontend servido pelo próprio backend): públicas, porque
+                        // os dados vêm sempre da API, que exige login.
+                        .anyRequest().permitAll())
                 .formLogin(form -> form
                         .loginProcessingUrl(LOGIN)
                         .usernameParameter("email")

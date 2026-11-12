@@ -205,6 +205,40 @@ cd frontend && npm run api:tipos
 
 ---
 
+## Deploy (Render ou qualquer servidor com Docker)
+
+O `Dockerfile` da raiz gera uma imagem única: o backend serve a API e as telas no mesmo endereço, com o Tesseract
+incluído para o OCR.
+
+### No Render
+
+1. Crie um **PostgreSQL** (New → PostgreSQL).
+2. Crie um **Web Service** a partir deste repositório e escolha **Language: Docker**. Com isso não é preciso
+   preencher Build Command nem Start Command.
+3. Em **Environment Variables**, crie:
+
+   | Variável | Valor |
+   |---|---|
+   | `SERENO_DB_URL` | `jdbc:postgresql://HOST:5432/BANCO`, com o host e o banco da "Internal Database URL" do Postgres |
+   | `SERENO_DB_USER` | usuário do banco |
+   | `SERENO_DB_PASSWORD` | senha do banco |
+   | `SERENO_URL_BASE` | o endereço do serviço, por exemplo `https://seu-servico.onrender.com` |
+   | `SERENO_ADMIN_EMAIL` | e-mail da primeira conta de administração |
+   | `SERENO_ADMIN_SENHA` | senha dela (8 caracteres, uma letra e um especial) |
+
+4. Em **Health Check Path**, use `/actuator/health`.
+
+A primeira conta de administração é criada na primeira subida. Depois, ela cadastra a coordenação na tela
+**Equipe**.
+
+Não use o perfil `dev` em produção: ele cria as contas de teste com senha pública.
+
+**Limitações do plano gratuito do Render:**
+- o disco é apagado a cada deploy, então os arquivos enviados se perdem; para guardá-los, é preciso um disco
+  persistente montado em `/app/dados`;
+- o serviço dorme sem uso;
+- o banco gratuito expira.
+
 ## Estrutura do repositório
 
 ```
