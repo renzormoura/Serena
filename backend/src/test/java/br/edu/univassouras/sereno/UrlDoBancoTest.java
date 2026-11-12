@@ -26,4 +26,18 @@ class UrlDoBancoTest {
         assertThat(UrlDoBanco.converter("jdbc:postgresql://localhost:5432/sereno")).isEmpty();
         assertThat(UrlDoBanco.converter(null)).isEmpty();
     }
+
+    @Test
+    void toleraEspacosAspasEFaltaDoPrefixo() {
+        assertThat(UrlDoBanco.converter("  \"postgresql://u:p@dpg-x-a/db\"  ").orElseThrow().url())
+                .isEqualTo("jdbc:postgresql://dpg-x-a:5432/db");
+        assertThat(UrlDoBanco.converter("u:p@dpg-x-a/db").orElseThrow().usuario()).contains("u");
+        assertThat(UrlDoBanco.converter(" jdbc:postgresql://h:5432/db ").orElseThrow().url()).isEqualTo("jdbc:postgresql://h:5432/db");
+    }
+
+    @Test
+    void formatoDesconhecidoDaMensagemClaraSemASenha() {
+        org.assertj.core.api.Assertions.assertThatThrownBy(() -> UrlDoBanco.converter("mysql://u:segredo@h/db"))
+                .hasMessageContaining("mysql://").hasMessageNotContaining("segredo");
+    }
 }

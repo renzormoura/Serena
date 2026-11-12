@@ -10,8 +10,10 @@ public class SerenoApplication {
 
 	public static void main(String[] args) {
 		// SERENO_DB_URL pode vir no formato da plataforma (postgresql://usuario:senha@host/banco).
-		UrlDoBanco.converter(System.getenv("SERENO_DB_URL"))
-				.ifPresent(conexao -> UrlDoBanco.propriedades(conexao).forEach(System::setProperty));
+		UrlDoBanco.converter(System.getenv("SERENO_DB_URL")).ifPresent(conexao -> {
+			UrlDoBanco.propriedades(conexao).forEach(System::setProperty);
+			System.out.println("Banco: " + UrlDoBanco.semSenha(conexao));
+		});
 		SpringApplication.run(SerenoApplication.class, args);
 	}
 
